@@ -309,9 +309,15 @@
     font-size: 1.8rem;
     cursor: pointer;
     transition: color 0.2s;
-    z-index: 10;
+    z-index: 11;
     line-height: 1;
     font-weight: 200;
+    padding: 0.75rem;
+    margin: -0.75rem;
+  }
+  @media (max-width: 900px) {
+    .lightbox-close { padding: 1.25rem; margin: -1.25rem; }
+    .lightbox-exif { top: 4rem; width: 90%; }
   }
   .lightbox-close:hover { color: var(--gold-light); }
   .lightbox-nav {
@@ -356,7 +362,7 @@
   }
   .lightbox-exif {
     position: absolute;
-    top: 1.5rem;
+    top: 2.5rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -364,7 +370,7 @@
     justify-content: center;
     gap: 0.5rem 1.5rem;
     z-index: 10;
-    width: 90%;
+    width: 80%;
     text-align: center;
   }
   .lightbox-exif span {
