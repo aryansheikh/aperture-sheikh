@@ -336,11 +336,11 @@
   .lightbox-next { right: 1.5rem; }
   .lightbox-meta {
     position: absolute;
-    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     z-index: 10;
+    transition: bottom 0.2s ease;
   }
   .lightbox-meta-cat { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem; }
   .lightbox-meta-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: var(--text); }
@@ -360,12 +360,15 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
     z-index: 10;
-    white-space: nowrap;
+    width: 90%;
+    text-align: center;
   }
   .lightbox-exif span {
-    font-size: 0.62rem;
+    font-size: 0.69rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--text-dim);
@@ -497,7 +500,7 @@
     footer { flex-direction: column; gap: 0.75rem; text-align: center; }
   }
   @media (max-width: 560px) {
-    .gallery-grid { columns: 1; }
+    .gallery-grid { columns: 2; }
   }
 </style>
 </head>
@@ -836,6 +839,15 @@
   }
   updateLightboxIndex();
 
+  function positionMeta() {
+    const imgRect = lightboxImg.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const imgBottom = imgRect.bottom;
+    const gap = windowHeight - imgBottom;
+    const metaEl = document.querySelector('.lightbox-meta');
+    metaEl.style.bottom = (gap / 2 - metaEl.offsetHeight / 2) + 'px';
+  }
+
   function openLightbox(index) {
     currentIndex = index;
     const item = visibleItems[currentIndex];
@@ -857,6 +869,8 @@
     resetZoom();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
+    lightboxImg.onload = positionMeta;
+    if (lightboxImg.complete) positionMeta();
   }
 
   function closeLightbox() {
