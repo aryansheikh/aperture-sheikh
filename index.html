@@ -758,13 +758,19 @@
     <h2 class="section-title">Get in <em>Touch</em></h2>
     <p class="contact-intro">For licensing, commissions, print enquiries,<br>or just to talk about birds.</p>
     <div class="contact-form">
+      <div data-fs-success style="display:none; text-align:center; padding: 2rem 0;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--gold-light); margin-bottom:0.5rem;">Message sent.</p>
+        <p style="font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim);">I'll be in touch soon.</p>
+      </div>
+      <div data-fs-error style="display:none; text-align:center; padding: 1rem 0; font-size:0.78rem; letter-spacing:0.15em; color:#c0756a;"></div>
+      <form id="contact-form">
       <div class="form-row">
-        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"></div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com" data-fs-field></div>
       </div>
       <div class="form-group">
         <label>Enquiry type</label>
-        <select>
+        <select name="enquiry_type">
           <option value="">Select a topic</option>
           <option>Image licensing</option>
           <option>Print purchase</option>
@@ -773,8 +779,11 @@
           <option>General</option>
         </select>
       </div>
-      <div class="form-group"><label>Message</label><textarea placeholder="Tell me what you're looking for..."></textarea></div>
-      <button class="submit-btn">Send Message</button>
+      <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell me what you're looking for..." data-fs-field></textarea></div>
+      <span data-fs-error="email" style="font-size:0.72rem; color:#c0756a; display:block; margin-top:-1rem; margin-bottom:1rem;"></span>
+      <span data-fs-error="message" style="font-size:0.72rem; color:#c0756a; display:block; margin-top:-1rem; margin-bottom:1rem;"></span>
+      <button class="submit-btn" data-fs-submit-btn>Send Message</button>
+      </form>
     </div>
     <div class="contact-social">
       <a href="#" class="social-link">Instagram</a>
@@ -939,5 +948,10 @@
     if (e.target === lightbox) closeLightbox();
   });
 </script>
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'mwvwzlqw' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
