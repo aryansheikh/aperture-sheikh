@@ -354,6 +354,28 @@
     color: var(--text-dim);
     opacity: 0.5;
   }
+  .lightbox-exif {
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5rem;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  .lightbox-exif span {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.7;
+  }
+  .lightbox-exif span:not(:last-child)::after {
+    content: '·';
+    margin-left: 1.5rem;
+    opacity: 0.4;
+  }
 
   /* ABOUT */
   #about {
@@ -690,6 +712,7 @@
       <span class="lightbox-meta-cat" id="lightboxCat"></span>
       <span class="lightbox-meta-title" id="lightboxTitle"></span>
     </div>
+    <div class="lightbox-exif" id="lightboxExif"></div>
     <div class="lightbox-zoom-hint" id="zoomHint">Click to zoom · Scroll to zoom</div>
   </div>
 </div>
@@ -797,9 +820,16 @@
   const lightboxCat = document.getElementById('lightboxCat');
   const lightboxTitle = document.getElementById('lightboxTitle');
   const lightboxImgWrap = document.getElementById('lightboxImgWrap');
+  const lightboxExif = document.getElementById('lightboxExif');
   let currentIndex = 0;
   let zoomLevel = 1;
   let visibleItems = [];
+  let photoMetadata = {};
+
+  fetch('metadata.json')
+    .then(r => r.json())
+    .then(d => { photoMetadata = d; })
+    .catch(() => {});
 
   function updateLightboxIndex() {
     visibleItems = [...document.querySelectorAll('.gallery-item:not(.hidden)')];
@@ -814,6 +844,16 @@
     lightboxImg.alt = img.alt;
     lightboxCat.textContent = item.dataset.category.charAt(0).toUpperCase() + item.dataset.category.slice(1);
     lightboxTitle.textContent = item.dataset.title;
+
+    // EXIF strip
+    const filename = img.src.split('/').pop();
+    const meta = photoMetadata[decodeURIComponent(filename)] || {};
+    const fields = ['camera', 'lens', 'focal_length', 'aperture', 'shutter', 'iso'];
+    lightboxExif.innerHTML = fields
+      .filter(f => meta[f])
+      .map(f => `<span>${meta[f]}</span>`)
+      .join('');
+
     resetZoom();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
