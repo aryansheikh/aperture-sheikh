@@ -837,8 +837,29 @@
 
   fetch('metadata.json')
     .then(r => r.json())
-    .then(d => { photoMetadata = d; })
+    .then(d => {
+      photoMetadata = d;
+      // Stamp each gallery item with its shoot date
+      galleryItems.forEach(item => {
+        const src = item.querySelector('img').src.split('/').pop();
+        const meta = d[decodeURIComponent(src)] || {};
+        if (meta.date_taken) item.dataset.date = meta.date_taken;
+      });
+      sortGalleryByDate();
+    })
     .catch(() => {});
+
+  function sortGalleryByDate() {
+    const grid = document.querySelector('.gallery-grid');
+    const items = [...grid.querySelectorAll('.gallery-item')];
+    items.sort((a, b) => {
+      const da = a.dataset.date || '';
+      const db = b.dataset.date || '';
+      return db.localeCompare(da);
+    });
+    items.forEach(item => grid.appendChild(item));
+    updateLightboxIndex();
+  }
 
   function updateLightboxIndex() {
     visibleItems = [...document.querySelectorAll('.gallery-item:not(.hidden)')];
