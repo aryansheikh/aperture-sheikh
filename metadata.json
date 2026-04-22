@@ -331,5 +331,50 @@
     "aperture": "f/5.6",
     "shutter": "1/8000s",
     "iso": "ISO 500"
+  },
+  "Imani - The City Bird.webp": {
+    "date_taken": "2026-04-21T16:51:39",
+    "camera": "NIKON CORPORATION NIKON D850",
+    "lens": "200.0-500.0 mm f/5.6",
+    "focal_length": "500mm",
+    "aperture": "f/5.6",
+    "shutter": "1/5000s",
+    "iso": "ISO 640"
+  },
+  "Imani Stride.webp": {
+    "date_taken": "2026-04-21T16:53:09",
+    "camera": "NIKON CORPORATION NIKON D850",
+    "lens": "200.0-500.0 mm f/5.6",
+    "focal_length": "500mm",
+    "aperture": "f/5.6",
+    "shutter": "1/5000s",
+    "iso": "ISO 640"
+  },
+  "Imani, Montrose Beach.webp": {
+    "date_taken": "2026-04-21T16:53:33",
+    "camera": "NIKON CORPORATION NIKON D850",
+    "lens": "200.0-500.0 mm f/5.6",
+    "focal_length": "500mm",
+    "aperture": "f/5.6",
+    "shutter": "1/5000s",
+    "iso": "ISO 640"
+  },
+  "Imani2, Montrose Beach.webp": {
+    "date_taken": "2026-04-21T16:24:06",
+    "camera": "NIKON CORPORATION NIKON D850",
+    "lens": "200.0-500.0 mm f/5.6",
+    "focal_length": "500mm",
+    "aperture": "f/5.6",
+    "shutter": "1/3200s",
+    "iso": "ISO 500"
+  },
+  "Northern Mockingbird, Montrose Point.webp": {
+    "date_taken": "2026-04-21T16:38:10",
+    "camera": "NIKON CORPORATION NIKON D850",
+    "lens": "200.0-500.0 mm f/5.6",
+    "focal_length": "500mm",
+    "aperture": "f/5.6",
+    "shutter": "1/4000s",
+    "iso": "ISO 500"
   }
 }
